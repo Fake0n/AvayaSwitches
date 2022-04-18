@@ -49,7 +49,7 @@ if __name__ == "__main__":
     with open('path to file', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
         lines = file.readlines()
         for devices in lines:
-            devices=devices[:10] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
+            devices=devices.strip() # Здесь можно задать, что нужно обрезать, чтобы получить корректный IP адрес.
             commands = ['sh memory-utilization'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
             result = send_show_command(f"{devices}", "login", "password", commands)
             pprint(result) # Эта строка необязательна, просто вывод того, что выполнилось в коде.
