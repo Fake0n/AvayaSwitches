@@ -10,8 +10,8 @@ def send_show_command(
     password,
     command,
     max_bytes=60000,
-    short_pause=1,
-    long_pause=5,
+    short_pause=0.5,
+    long_pause=2,
 ):
     cl = paramiko.SSHClient()
     cl.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -32,7 +32,6 @@ def send_show_command(
         for command in commands:
             ssh.send(f"{command}\n")
             ssh.settimeout(5)
-
             output = ""
             while True:
                 try:
@@ -41,16 +40,16 @@ def send_show_command(
                     time.sleep(0.5)
                 except socket.timeout:
                     break
-            result[command] = output
+            result[devices] = output
 
         return result
 
 
 if __name__ == "__main__":
-    with open('C://Users/S.Egorov/Downloads/file.txt', 'r') as file:
+    with open('path to file', 'r') as file:
         lines = file.readlines()
         for devices in lines:
             devices=devices[:10]
-            commands = ['sh clock']
-            result = send_show_command(f"{devices}","s.egorov", "Sysadm123", commands)
-            pprint(result, width=120)
+            commands = ['sh memory-utilization']
+            result = send_show_command(f"{devices}", "login", "password", commands)
+            pprint(result)
