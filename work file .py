@@ -2,7 +2,7 @@ import paramiko
 import time
 import socket
 from pprint import pprint
-import re
+
 
 def send_show_command(
     ip,
@@ -24,6 +24,7 @@ def send_show_command(
     )
 
     with cl.invoke_shell() as ssh:
+        ssh.send("terminal length 0\n")
         time.sleep(short_pause)
         ssh.recv(max_bytes)
 
@@ -45,14 +46,10 @@ def send_show_command(
 
 
 if __name__ == "__main__":
-    with open('path to file', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
+    with open('path to file', 'r') as file:
         lines = file.readlines()
         for devices in lines:
-            devices=devices.strip()[5:16] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
-            commands = ['sh clock'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
+            devices=devices[:10]
+            commands = ['sh memory-utilization']
             result = send_show_command(f"{devices}", "login", "password", commands)
-            # Вывести более читаемый вид:
-            for i in dict.values(result):
-                pprint(re.sub("[\r]", "", i))
-            print(type(i))
-            #print(type(result))
+            pprint(result)
