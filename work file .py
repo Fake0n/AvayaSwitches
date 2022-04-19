@@ -40,7 +40,8 @@ def send_show_command(
                 except socket.timeout:
                     break
             result[devices] = output
-
+            for i in dict.values(result):
+                pprint(re.sub("[\r]", "", i))
         return result
 
 
@@ -51,8 +52,3 @@ if __name__ == "__main__":
             devices=devices.strip()[5:16] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
             commands = ['sh clock'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
             result = send_show_command(f"{devices}", "login", "password", commands)
-            # Вывести более читаемый вид:
-            for i in dict.values(result):
-                pprint(re.sub("[\r]", "", i))
-            print(type(i))
-            #print(type(result))
