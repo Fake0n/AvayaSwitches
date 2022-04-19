@@ -47,9 +47,9 @@ def send_show_command(
 
 
 if __name__ == "__main__":
-    with open('C:/Users/S.Egorov/Downloads/file.txt', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
+    with open('path', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
         lines = file.readlines()
         for devices in lines:
             devices=devices.strip()[:11] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
             commands = ['sh clock','sh cli info'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
-            result = send_show_command(f"{devices}", "s.egorov", "Sysadm123", commands)
+            result = send_show_command(f"{devices}", "login", "password", commands)
