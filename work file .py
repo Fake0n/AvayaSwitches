@@ -40,7 +40,7 @@ def send_show_command(
                 except socket.timeout:
                     break
             result[devices] = output
-            for i in dict.values(result):
+            for i in dict.values(result): # вывод, если нужна какая-то информация о выполнении
                 pprint(devices)
                 pprint(re.sub("[\r]", "", i))
         return result
