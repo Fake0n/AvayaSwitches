@@ -41,14 +41,15 @@ def send_show_command(
                     break
             result[devices] = output
             for i in dict.values(result):
+                pprint(devices)
                 pprint(re.sub("[\r]", "", i))
         return result
 
 
 if __name__ == "__main__":
-    with open('path to file', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
+    with open('C:/Users/S.Egorov/Downloads/file.txt', 'r') as file: # Нужно указать полный путь к файлу С:/.../xxxx.txt
         lines = file.readlines()
         for devices in lines:
-            devices=devices.strip()[5:16] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
-            commands = ['sh clock'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
-            result = send_show_command(f"{devices}", "login", "password", commands)
+            devices=devices.strip()[:11] # Нужно для того, чтобы при чтении файла удалить лишний символ переноса строки '\n', чтобы посдставлялся корректный IP.
+            commands = ['sh clock','sh cli info'] # Здесь нужно указать нужные команды последовательно (так, как вводили бы вручную).
+            result = send_show_command(f"{devices}", "s.egorov", "Sysadm123", commands)
