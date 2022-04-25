@@ -45,7 +45,7 @@ def send_show_command(
             for i in dict.values(result): # вывод, если нужна какая-то информация о выполнении.
                 pprint(devices)
                 pprint(re.sub("[\r]", "", i))
-                with open('path1', '+a') as file2: # сюда пишем имя файл, куда нужно скинуть информацию из введенной команды.
+                with open('path1', '+a') as file2: # сюда пишем имя файл, куда нужно скинуть информацию из введенной команды. 
                         lines2 = file2.write(re.sub("[\r]", "", i))
                         lines2.close()
         return result
